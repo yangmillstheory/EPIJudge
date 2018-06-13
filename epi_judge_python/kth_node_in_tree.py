@@ -14,10 +14,11 @@ class BinaryTreeNode:
 
 
 def find_kth_node_binary_tree(root, k):
-    return kth_in_order_recursive(root, k)
+    return kth_in_order_iterative(root, k)
 
 
 def kth_in_order_recursive(root, k):
+    # T(n) = S(n) = O(h)
     if not root:
         return
     l, r = root.left, root.right
@@ -33,16 +34,22 @@ def kth_in_order_recursive(root, k):
 
 
 def kth_in_order_iterative(root, k):
-    '''kth node in a binary tree with T(n) = O(h) and S(n) = O(1).'''
+    # T(n) = O(h)
+    # S(n) = O(1)
     while root:
-        l_size = root.left.size if root.left else 0
-        if l_size+1 == k:
-            return root.data
-        elif k <= l_size:
-            root = root.left
+        l, r = root.left, root.right
+        if l:
+            if k == l.size+1:
+                break
+            if k < l.size+1:
+                root = root.left
+            else:
+                root, k = r, k-(l.size+1)
+        elif k == 1:
+            break
         else:
-            root = root.right
-            k -= l_size+1
+            root, k = r, k-1
+    return root
 
 
 @enable_executor_hook
