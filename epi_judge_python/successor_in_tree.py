@@ -5,9 +5,20 @@ from test_framework.binary_tree_utils import must_find_node
 from test_framework.test_utils import enable_executor_hook
 
 
-def find_successor(node):
-    # TODO - you fill in here.
-    return None
+def find_successor(root):
+    '''In-order successor in a binary tree in O(h) time and O(1) space.'''
+    if root.right:
+        root = root.right
+        while root.left:
+            root = root.left
+        return root
+    elif root.parent:
+        # this condition isn't really necessary given loop below, but it's clearer this way
+        if root.parent.left == root:
+            return root.parent
+        while root.parent and root.parent.right == root:
+            root = root.parent
+        return root.parent
 
 
 @enable_executor_hook
