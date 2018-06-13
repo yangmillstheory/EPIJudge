@@ -14,31 +14,22 @@ class BinaryTreeNode:
 
 
 def find_kth_node_binary_tree(root, k):
-    return kth_in_order(root, k)
+    return kth_in_order_recursive(root, k)
 
 
-# l = 3
-# n = 6
-# r = 2
-# k = 5
-# k-1 = 4
-
-
-def kth_in_order(root, k):
-    '''kth node in a binary tree with T(n) = O(h) and S(n) = O(h).'''
+def kth_in_order_recursive(root, k):
     if not root:
         return
-    l, r, n = root.left, root.right, root.size
+    l, r = root.left, root.right
     if l:
-        if n-l.size == k-1:
+        if k == l.size+1:
             return root
-        if n-l.size > k-1:
-            return kth_in_order(l, k)
-        return kth_in_order(r, k-1-(n-l.size))
+        if k < l.size+1:
+            return kth_in_order_recursive(l, k)
+        return kth_in_order_recursive(r, k-(l.size+1))
     if k == 1:
         return root
-    if r:
-        return kth_in_order(r, k-1)
+    return kth_in_order_recursive(r, k-1)
 
 
 def kth_in_order_iterative(root, k):
