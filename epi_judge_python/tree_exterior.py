@@ -7,9 +7,7 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def l_side(root, res):
-    if not root:
-        return
-    if _is_leaf(root):
+    if not root or _is_leaf(root):
         return
     res.append(root)
     if root.left:
