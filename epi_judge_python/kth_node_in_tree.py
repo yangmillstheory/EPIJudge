@@ -13,9 +13,45 @@ class BinaryTreeNode:
         self.size = size
 
 
-def find_kth_node_binary_tree(tree, k):
-    # TODO - you fill in here.
-    return None
+def find_kth_node_binary_tree(root, k):
+    return kth_in_order(root, k)
+
+
+# l = 3
+# n = 6
+# r = 2
+# k = 5
+# k-1 = 4
+
+
+def kth_in_order(root, k):
+    '''kth node in a binary tree with T(n) = O(h) and S(n) = O(h).'''
+    if not root:
+        return
+    l, r, n = root.left, root.right, root.size
+    if l:
+        if n-l.size == k-1:
+            return root
+        if n-l.size > k-1:
+            return kth_in_order(l, k)
+        return kth_in_order(r, k-1-(n-l.size))
+    if k == 1:
+        return root
+    if r:
+        return kth_in_order(r, k-1)
+
+
+def kth_in_order_iterative(root, k):
+    '''kth node in a binary tree with T(n) = O(h) and S(n) = O(1).'''
+    while root:
+        l_size = root.left.size if root.left else 0
+        if l_size+1 == k:
+            return root.data
+        elif k <= l_size:
+            root = root.left
+        else:
+            root = root.right
+            k -= l_size+1
 
 
 @enable_executor_hook
