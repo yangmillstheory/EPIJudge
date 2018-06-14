@@ -3,6 +3,7 @@ from test_framework import generic_test
 
 def find_nearest_repetition(words):
     seen = {}
+    # odd choice of default return value
     min_dist = -1
     for j, word in enumerate(words):
         if word in seen:
