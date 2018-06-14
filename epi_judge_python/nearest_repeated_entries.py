@@ -1,9 +1,16 @@
 from test_framework import generic_test
 
 
-def find_nearest_repetition(paragraph):
-    # TODO - you fill in here.
-    return 0
+def find_nearest_repetition(words):
+    seen = {}
+    min_dist = -1
+    for j, word in enumerate(words):
+        if word in seen:
+            if min_dist == -1:
+                min_dist = float('inf')
+            min_dist = min(min_dist, j-seen[word])
+        seen[word] = j
+    return min_dist
 
 
 if __name__ == '__main__':
