@@ -22,6 +22,25 @@ def find_smallest_sequentially_covering_subset_quadratic(text, words):
     return min_cover
 
 
+def find_smallest_sequentially_covering_subset(text, words):
+    w = len(words)
+    ind = {word: j for j, word in enumerate(words)}
+    memo, min_length, min_cover = [float('inf')] * w, float('inf'), None
+    latest = [-1] * w
+    for i, word in enumerate(text):
+        if word not in ind:
+            continue
+        j = ind[word]
+        latest[j] = i
+        if j == 0:
+            memo[j] = 1
+        elif memo[j-1] is not None:
+            memo[j] = i-latest[j-1]+memo[j-1]
+        if j == w-1 and memo[-1] < min_length:
+            min_length, min_cover = memo[-1], Subarray(i-memo[-1]+1, i)
+    return min_cover
+
+
 @enable_executor_hook
 def find_smallest_sequentially_covering_subset_wrapper(executor, paragraph,
                                                        keywords):
