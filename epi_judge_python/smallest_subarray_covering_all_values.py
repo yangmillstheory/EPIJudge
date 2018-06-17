@@ -7,9 +7,19 @@ from test_framework.test_utils import enable_executor_hook
 Subarray = collections.namedtuple('Subarray', ('start', 'end'))
 
 
-def find_smallest_sequentially_covering_subset(paragraph, keywords):
-    # TODO - you fill in here.
-    return Subarray(0, 0)
+def find_smallest_sequentially_covering_subset_quadratic(text, words):
+    n = len(text)
+    min_cover = None
+    for i in range(n):
+        k = 0
+        for j in range(i, n):
+            if text[j] == words[k]:
+                k += 1
+            if k == len(words):
+                if min_cover is None or j-i < min_cover[1]-min_cover[0]:
+                    min_cover = Subarray(i, j)
+                break
+    return min_cover
 
 
 @enable_executor_hook
