@@ -73,7 +73,8 @@ def n_choose_k_dp_3(n, k):
 
 
 def compute_binomial_coefficient(n, k):
-    return n_choose_k_dp_3(n, k)
+    # this implementation is the fastest
+    return n_choose_k_memo(n, k, {})
 
 
 if __name__ == '__main__':
