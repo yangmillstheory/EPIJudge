@@ -8,8 +8,16 @@ Item = collections.namedtuple('Item', ('weight', 'value'))
 
 
 def optimum_subject_to_capacity(items, capacity):
-    # TODO - you fill in here.
-    return 0
+    # T(i,c) = O(i*c)
+    # S(i,c) = O(c)
+    memo = [0]*(capacity+1)
+    for weight, value in items:
+        for j in range(capacity, 0, -1):
+            memo[j] = max(
+                memo[j],
+                memo[j-weight]+value if j-weight >= 0 else float('-inf')
+            )
+    return memo[-1]
 
 
 @enable_executor_hook
