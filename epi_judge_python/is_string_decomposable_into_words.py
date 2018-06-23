@@ -23,11 +23,32 @@ def _walk(s, words, start, used, seen):
     return False, used
 
 
-def decompose_into_dictionary_words(s, words):
+def decompose_into_dictionary_words_recursion(s, words):
     ok, used = _walk(s, words, 0, [], set())
     if ok:
         return used
     return False
+
+
+def decompose_into_dictionary_words(s, words):
+    n = len(s)
+    rev_len = [None]*n
+    for j in range(1, n+1):
+        if s[:j] in words:
+            rev_len[j-1] = j-1
+        if rev_len[j-1] is None:
+            for i in range(j-1):
+                if rev_len[i] is not None and s[i+1:j] in words:
+                    rev_len[j-1] = j-1-i-1
+    if rev_len[-1] is None:
+        return False
+    decomp = []
+    j = n-1
+    while j >= 0:
+        if rev_len[j] is not None:
+            decomp.append(s[j-rev_len[j]:j+1])
+            j -= rev_len[j]+1
+    return decomp[::-1]
 
 
 @enable_executor_hook
