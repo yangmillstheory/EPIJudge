@@ -31,6 +31,7 @@ def decompose_into_dictionary_words_recursion(s, words):
 
 
 def decompose_into_dictionary_words(s, words):
+    # really tough to grok O(n^3)/O(n) solution
     n = len(s)
     rev_len = [None]*n
     for j in range(1, n+1):
