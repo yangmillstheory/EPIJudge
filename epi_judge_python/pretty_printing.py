@@ -2,9 +2,15 @@ from test_framework import generic_test
 
 
 def minimum_messiness(words, length):
+    # recurrence relation:
+    #
+    #   F(j) = min(F(i-1) + messiness_of_line(words[i:j+1]) for i <= j)
+    #
+    # T(n) = O(n^2)
+    # S(n) = O(n)
     n = len(words)
-    n_blanks = length - len(words[0])
-    dp = [pow(n_blanks, 2)] + [float('inf') for _ in range(n-1)]
+    # dp[i] models the subproblem on words[:i+1]
+    dp = [pow(length - len(words[0]), 2)] + [float('inf') for _ in range(n-1)]
     for j in range(1, n):
         n_blanks = length - len(words[j])
         dp[j] = dp[j-1] + pow(n_blanks, 2)
