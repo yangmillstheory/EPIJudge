@@ -4,6 +4,9 @@ from test_framework import generic_test
 def maximum_revenue(coins):
     # note that it's harder to do this in a tabular way
     # due to the order that the subproblems are computed
+    #
+    # T(n) = O(n^2)
+    # S(n) = O(n^2)
     n = len(coins)
     dp = [[0]*n for _ in range(n)]
 
