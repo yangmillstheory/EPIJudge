@@ -1,3 +1,4 @@
+import operator
 import collections
 import functools
 
@@ -8,8 +9,13 @@ Interval = collections.namedtuple('Interval', ('left', 'right'))
 
 
 def find_minimum_visits(intervals):
-    # TODO - you fill in here.
-    return 0
+    intervals.sort(key=operator.attrgetter('right'))
+    n, end = 0, float('-inf')
+    for left, right in intervals:
+        if left > end:
+            n += 1
+            end = right
+    return n
 
 
 @enable_executor_hook
