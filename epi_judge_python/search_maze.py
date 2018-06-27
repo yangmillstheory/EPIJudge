@@ -13,16 +13,16 @@ Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
 
 def search_maze(maze, s, e):
     # Search a maze in O(n) time and O(n) space.
-    visited, path = set(), []
+    path = []
 
     def is_visitable(x, y):
-        return 0 <= x < len(maze) and 0 <= y < len(maze[0]) and (x, y) not in visited and maze[x][y] != BLACK
+        return 0 <= x < len(maze) and 0 <= y < len(maze[0]) and maze[x][y] != BLACK
 
     def dfs(i, j):
-        p = Coordinate(i, j)
-        path.append(p)
-        visited.add(p)
-        if (i, j) == e:
+        c = Coordinate(i, j)
+        path.append(c)
+        maze[i][j] = BLACK
+        if c == e:
             return True
         found = False
         for x, y in ((i+1, j), (i, j+1), (i-1, j), (i, j-1)):
