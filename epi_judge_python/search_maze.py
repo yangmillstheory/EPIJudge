@@ -29,7 +29,7 @@ def search_maze(maze, s, e):
             if is_visitable(x, y) and dfs(x, y):
                 found = True
                 break
-        if not found:
+        else:
             path.pop()
         return found
     dfs(*s)
