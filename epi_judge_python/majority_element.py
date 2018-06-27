@@ -2,8 +2,15 @@ from test_framework import generic_test
 
 
 def majority_search(stream):
-    # TODO - you fill in here.
-    return ''
+    count, last = 0, None
+    for x in stream:
+        if count == 0:
+            last, count = x, 1
+        elif last == x:
+            count += 1
+        else:
+            count -= 1
+    return last
 
 
 def majority_search_wrapper(stream):
