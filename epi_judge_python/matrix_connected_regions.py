@@ -2,6 +2,7 @@ from test_framework import generic_test
 
 
 def flip_color(x, y, image):
+    # T(m,n) = S(m,n) = O(m*n)
     orig = image[x][y]
 
     def can_visit(i, j):
