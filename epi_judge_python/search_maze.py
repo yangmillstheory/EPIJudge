@@ -12,8 +12,28 @@ Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
 
 
 def search_maze(maze, s, e):
-    # TODO - you fill in here.
-    return []
+    # Search a maze in O(n) time and O(n) space.
+    visited, path = set(), []
+
+    def is_visitable(x, y):
+        return 0 <= x < len(maze) and 0 <= y < len(maze[0]) and (x, y) not in visited and maze[x][y] != BLACK
+
+    def dfs(i, j):
+        p = Coordinate(i, j)
+        path.append(p)
+        visited.add(p)
+        if (i, j) == e:
+            return True
+        found = False
+        for x, y in ((i+1, j), (i, j+1), (i-1, j), (i, j-1)):
+            if is_visitable(x, y) and dfs(x, y):
+                found = True
+                break
+        if not found:
+            path.pop()
+        return found
+    dfs(*s)
+    return path
 
 
 def path_element_is_feasible(maze, prev, cur):
