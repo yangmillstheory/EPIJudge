@@ -5,13 +5,24 @@ from test_framework.test_utils import enable_executor_hook
 
 
 class GraphVertex:
+    WHITE, GRAY, BLACK = range(3)
+
     def __init__(self):
         self.edges = []
+        self.color = self.WHITE
 
 
 def is_deadlocked(graph):
-    # TODO - you fill in here.
-    return True
+    # T(n) = O(n)
+    # S(n) = O(n)
+    def dfs(v):
+        v.color = GraphVertex.GRAY
+        for u in v.edges:
+            if u.color == GraphVertex.GRAY or (u.color == GraphVertex.WHITE and dfs(u)):
+                return True
+        v.color = GraphVertex.BLACK
+        return False
+    return any(dfs(v) for v in graph)
 
 
 @enable_executor_hook
