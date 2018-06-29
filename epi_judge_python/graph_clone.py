@@ -10,9 +10,17 @@ class GraphVertex:
         self.edges = []
 
 
-def clone_graph(graph):
-    # TODO - you fill in here.
-    return GraphVertex(0)
+def clone_graph(v):
+    clones = {}
+
+    def _clone(t):
+        if t in clones:
+            return clones[t]
+        clone = clones.setdefault(t, GraphVertex(t.label))
+        for u in t.edges:
+            clone.edges.append(clones.get(u) or _clone(u))
+        return clone
+    return _clone(v)
 
 
 def copy_labels(edges):
