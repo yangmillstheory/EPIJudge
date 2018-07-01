@@ -1,9 +1,18 @@
 from test_framework import generic_test
 
 
-def get_max_trapped_water(heights):
-    # TODO - you fill in here.
-    return 0
+def get_max_trapped_water(hs):
+    # T(n) = O(n)
+    lo, hi = 0, len(hs)-1
+    _max_area = 0
+    while lo <= hi:
+        min_h, i = min([(hs[lo], lo), (hs[hi], hi)])
+        _max_area = max(_max_area, (hi-lo)*min_h)
+        if i == hi:
+            hi -= 1
+        else:
+            lo += 1
+    return _max_area
 
 
 if __name__ == '__main__':
