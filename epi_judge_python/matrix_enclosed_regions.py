@@ -34,7 +34,6 @@ def fill_surrounded_regions(g):
                 g[i][j] = white
 
 
-
 def fill_surrounded_regions_wrapper(board):
     fill_surrounded_regions(board)
     return board
