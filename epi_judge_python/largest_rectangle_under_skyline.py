@@ -9,10 +9,7 @@ def calculate_largest_rectangle(hs):
     for i, h in enumerate(hs + [0]):
         while pillars and pillars[-1].h > h:
             _i, _h = pillars.pop()
-            if pillars:
-                w = i - pillars[-1].i - 1
-            else:
-                w = i
+            w = i - pillars[-1].i - 1 if pillars else i
             res = max(res, w*_h)
         pillars.append(Pillar(i, h))
     return res
