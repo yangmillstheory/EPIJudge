@@ -2,13 +2,28 @@ from test_framework import generic_test
 
 
 class Queue:
+    def __init__(self):
+        '''TODO: Docstring for __init__.
+
+        :param f: TODO
+        :returns: TODO
+        '''
+        self._push_stack = []
+        self._pop_stack = []
+
     def enqueue(self, x):
-        # TODO - you fill in here.
-        return
+        # T(n) = O(1)
+        self._push_stack.append(x)
 
     def dequeue(self):
-        # TODO - you fill in here.
-        return 0
+        # T(n) = O(n)
+        self._ensure_pop_stack()
+        return self._pop_stack.pop()
+
+    def _ensure_pop_stack(self):
+        if not self._pop_stack:
+            while self._push_stack:
+                self._pop_stack.append(self._push_stack.pop())
 
 
 def queue_tester(ops):
