@@ -1,19 +1,32 @@
+from collections import deque
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
 
-class QueueWithMax:
+class QueueWithMax(deque):
+    '''Queue with max API. Takes up O(n) extra space.'''
+
+    def __init__(self):
+        self._cands = deque()
+
     def enqueue(self, x):
-        # TODO - you fill in here.
-        return
+        # T(n) = O(1) amortized?
+        self.append(x)
+        while self._cands and self._cands[-1] < x:
+            # all previous and lesser candidates can never be the max.
+            self._cands.pop()
+        self._cands.append(x)
 
     def dequeue(self):
-        # TODO - you fill in here.
-        return 0
+        # T(n) = O(1)
+        x = self.popleft()
+        if x == self._cands[0]:
+            self._cands.popleft()
+        return x
 
     def max(self):
-        # TODO - you fill in here.
-        return 0
+        # T(n) = O(1)
+        return self._cands[0] if self._cands else None
 
 
 def queue_tester(ops):
