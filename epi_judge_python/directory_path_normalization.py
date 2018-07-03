@@ -4,11 +4,6 @@ from test_framework import generic_test
 DELIM = '/'
 
 
-def append_if_nonempty(l, x):
-    if x:
-        l.append(x)
-
-
 def shortest_equivalent_path(path):
     # T(n) = S(n) = O(n)
     nodes = []
