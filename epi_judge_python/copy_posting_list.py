@@ -20,14 +20,14 @@ def _jump_first_order_iterative(L):
     clones = {None: None}
     stack = [(L, None, None)]
     while stack:
-        u, u_jump_from, u_next_from = stack.pop()
+        u, jump_from, next_from = stack.pop()
         if u not in clones:
             clones[u] = PostingListNode(u.order, None, None)
         clone = clones[u]
-        if u_jump_from:
-            u_jump_from.jump = clone
-        if u_next_from:
-            u_next_from.next = clone
+        if jump_from:
+            jump_from.jump = clone
+        if next_from:
+            next_from.next = clone
         if u:
             if u.jump not in clones or clone.jump != clones[u.jump]:
                 stack.append((u.jump, clone, None))
