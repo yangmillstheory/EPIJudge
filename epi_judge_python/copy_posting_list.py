@@ -6,9 +6,17 @@ from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
 
+def _jump_first_order(L, clones):
+    if L in clones:
+        return clones[L]
+    clone = PostingListNode(L.order, None, None)
+    clones[L] = clone
+    clone.jump = _jump_first_order(L.jump, clones)
+    clone.next = _jump_first_order(L.next, clones)
+    return clone
+
 def copy_postings_list(L):
-    # TODO - you fill in here.
-    return None
+    return _jump_first_order(L, {None: None})
 
 
 def assert_lists_equal(orig, copy):
