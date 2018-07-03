@@ -6,17 +6,39 @@ from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
 
-def _jump_first_order(L, clones):
+def _jump_first_order_recursive(L, clones):
     if L in clones:
         return clones[L]
     clone = PostingListNode(L.order, None, None)
     clones[L] = clone
-    clone.jump = _jump_first_order(L.jump, clones)
-    clone.next = _jump_first_order(L.next, clones)
+    clone.jump = _jump_first_order_recursive(L.jump, clones)
+    clone.next = _jump_first_order_recursive(L.next, clones)
     return clone
 
+
+def _jump_first_order_iterative(L):
+    clones = {None: None}
+    stack = [(L, None, None)]
+    while stack:
+        u, u_jump_from, u_next_from = stack.pop()
+        if u not in clones:
+            clones[u] = PostingListNode(u.order, None, None)
+        clone = clones[u]
+        if u_jump_from:
+            u_jump_from.jump = clone
+        if u_next_from:
+            u_next_from.next = clone
+        if u:
+            if u.jump not in clones or clone.jump != clones[u.jump]:
+                stack.append((u.jump, clone, None))
+            if u.next not in clones or clone.next != clones[u.next]:
+                stack.append((u.next, None, clone))
+    return clones[L]
+
+
 def copy_postings_list(L):
-    return _jump_first_order(L, {None: None})
+    # return _jump_first_order_recursive(L, {None: None})
+    return _jump_first_order_iterative(L)
 
 
 def assert_lists_equal(orig, copy):
