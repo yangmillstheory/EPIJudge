@@ -4,10 +4,6 @@ from test_framework import generic_test
 ops = {'+', '-', '/', '*'}
 
 
-def signum(x):
-    return -1 if x < 0 else 1
-
-
 def evaluate(tokens):
     # T(n) = S(n) = O(n)
     tokens = tokens.split(',')
@@ -22,7 +18,7 @@ def evaluate(tokens):
         elif ch == '-':
             c = a-b
         elif ch == '/':
-            c = signum(a)*signum(b)*(abs(a)//abs(b))
+            c = a//b
         elif ch == '*':
             c = a*b
         else:
