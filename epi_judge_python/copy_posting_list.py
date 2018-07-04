@@ -1,5 +1,5 @@
 import functools
-
+from collections import namedtuple
 from posting_list_node import PostingListNode
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
@@ -16,24 +16,28 @@ def _jump_first_order_recursive(L, clones):
     return clone
 
 
-def _jump_first_order_iterative(L):
+
+def _jump_first_order_iterative(node):
+    StackElement = namedtuple('StackElement', ['node', 'jump_from', 'next_from'])
+
     clones = {None: None}
-    stack = [(L, None, None)]
+    stack = [StackElement(node, None, None)]
     while stack:
-        u, jump_from, next_from = stack.pop()
-        if u not in clones:
-            clones[u] = PostingListNode(u.order, None, None)
-        clone = clones[u]
+        _node, jump_from, next_from = stack.pop()
+        if not _node:
+            continue
+        if _node not in clones:
+            clones[_node] = PostingListNode(_node.order, None, None)
+        clone = clones[_node]
         if jump_from:
             jump_from.jump = clone
         if next_from:
             next_from.next = clone
-        if u:
-            if u.jump not in clones or clone.jump != clones[u.jump]:
-                stack.append((u.jump, clone, None))
-            if u.next not in clones or clone.next != clones[u.next]:
-                stack.append((u.next, None, clone))
-    return clones[L]
+        if _node.jump not in clones or clone.jump != clones[_node.jump]:
+            stack.append(StackElement(node=_node.jump, jump_from=clone, next_from=None))
+        if _node.next not in clones or clone.next != clones[_node.next]:
+            stack.append(StackElement(node=_node.next, jump_from=None, next_from=clone))
+    return clones[node]
 
 
 def copy_postings_list(L):
