@@ -16,8 +16,16 @@ def _quadratic_time_slow(bs):
     return res
 
 
-def examine_buildings_with_sunset(*args):
-    return _quadratic_time_slow(*args)
+def examine_buildings_with_sunset(bs):
+    # T(n) = S(n) = O(n)
+    n, cands = len(bs), []
+    for i, h in enumerate(bs):
+        if i == n-1 or bs[i+1] < h:
+            while cands and bs[cands[-1]] <= h:
+                cands.pop()
+            cands.append(i)
+    cands.reverse()
+    return cands
 
 
 def examine_buildings_with_sunset_wrapper(sequence):
