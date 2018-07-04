@@ -8,8 +8,9 @@ def _quadratic_time_slow(bs):
     res = set(range(n))
     for i in range(n):
         for j in range(i+1, n):
-            if bs[i] <= bs[j] and i in res:
+            if bs[i] <= bs[j]:
                 res.remove(i)
+                break
     res = list(res)
     res.reverse()
     return res
