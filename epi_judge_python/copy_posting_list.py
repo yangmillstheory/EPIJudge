@@ -16,7 +16,6 @@ def _jump_first_order_recursive(L, clones):
     return clone
 
 
-
 def _jump_first_order_iterative(node):
     StackElement = namedtuple('StackElement', ['node', 'jump_from', 'next_from'])
 
@@ -33,10 +32,10 @@ def _jump_first_order_iterative(node):
             jump_from.jump = clone
         if next_from:
             next_from.next = clone
-        if _node.jump not in clones or clone.jump != clones[_node.jump]:
-            stack.append(StackElement(node=_node.jump, jump_from=clone, next_from=None))
         if _node.next not in clones or clone.next != clones[_node.next]:
             stack.append(StackElement(node=_node.next, jump_from=None, next_from=clone))
+        if _node.jump not in clones or clone.jump != clones[_node.jump]:
+            stack.append(StackElement(node=_node.jump, jump_from=clone, next_from=None))
     return clones[node]
 
 
