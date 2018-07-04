@@ -1,9 +1,22 @@
 from test_framework import generic_test
 
 
-def examine_buildings_with_sunset(sequence):
-    # TODO - you fill in here.
-    return []
+def _quadratic_time_slow(bs):
+    # T(n) = O(n^2)
+    # S(n) = O(n)
+    n = len(bs)
+    res = set(range(n))
+    for i in range(n):
+        for j in range(i+1, n):
+            if bs[i] <= bs[j] and i in res:
+                res.remove(i)
+    res = list(res)
+    res.reverse()
+    return res
+
+
+def examine_buildings_with_sunset(*args):
+    return _quadratic_time_slow(*args)
 
 
 def examine_buildings_with_sunset_wrapper(sequence):
