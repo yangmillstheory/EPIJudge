@@ -3,7 +3,29 @@ from test_framework import generic_test
 
 def calculate_trapping_water(hs):
     # return _brute_force(hs)
-    return _dp(hs)
+    # return _dp(hs)
+    return _one_pass(hs)
+
+
+def _one_pass(hs):
+    res, n = 0, len(hs)
+    lo, hi = 0, n-1
+    l_max = r_max = 0
+    while lo < hi:
+        if hs[lo] < hs[hi]:
+            if l_max > hs[lo]:
+                res += l_max-hs[lo]
+            else:
+                l_max = hs[lo]
+            lo += 1
+        else:
+            if r_max > hs[hi]:
+                res += r_max-hs[hi]
+            else:
+                r_max = hs[hi]
+            hi -= 1
+    return res
+
 
 
 def _dp(hs):
