@@ -1,9 +1,23 @@
 from test_framework import generic_test
 
 
-def search_first_of_k(A, k):
-    # TODO - you fill in here.
-    return 0
+def _search_recursive(cands, k, lo, hi):
+    # T(n) = S(n) = O(log n)
+    if lo > hi:
+        return -1
+    mid = lo + (hi-lo)//2
+    if cands[mid] == k:
+        if mid == 0 or cands[mid-1] != k:
+            return mid
+        return _search_recursive(cands, k, lo, mid-1)
+    elif cands[mid] < k:
+        return _search_recursive(cands, k, mid+1, hi)
+    else:
+        return _search_recursive(cands, k, lo, mid-1)
+
+
+def search_first_of_k(cands, k):
+    return _search_recursive(cands, k, 0, len(cands)-1)
 
 
 if __name__ == '__main__':
