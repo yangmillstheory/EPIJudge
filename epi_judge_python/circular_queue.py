@@ -1,3 +1,4 @@
+import functools
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
@@ -19,9 +20,11 @@ class Queue:
         '''Enqueue operation in amortized O(1) time.'''
         self._q[self._tail] = x
         self._tail += 1
-        size = len(self._q)
-        if self._tail == size:
-            self._q += [None for _ in range(size)]
+        size = self.size()
+        if self._tail == len(self._q):
+            self._q = self._q[self._head:self._tail] + [None for _ in range(size)]
+            self._head = 0
+            self._tail = size
 
     def dequeue(self):
         '''Dequeue an element in O(1) time. Raises exception if queue was empty.'''
