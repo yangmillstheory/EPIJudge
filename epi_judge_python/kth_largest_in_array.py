@@ -1,12 +1,32 @@
 from test_framework import generic_test
 
 
-# The numbering starts from one, i.e., if A = [3, 1, -1, 2]
-# find_kth_largest(1, A) returns 3, find_kth_largest(2, A) returns 2,
-# find_kth_largest(3, A) returns 1, and find_kth_largest(4, A) returns -1.
-def find_kth_largest(k, A):
-    # TODO - you fill in here.
-    return 0
+def partition(a, lo, hi):
+    mid = lo + (hi-lo)//2
+    a[mid], a[hi] = a[hi], a[mid]
+    j = lo  # points to first el. >= a[hi]
+    for i in range(lo, hi):
+        if a[i] < a[hi]:
+            a[i], a[j] = a[j], a[i]
+            j += 1
+    a[j], a[hi] = a[hi], a[j]
+    return j
+
+
+def find_kth_largest(k, a):
+    # T(n) = O(n)
+    # S(n) = O(1)
+    n = len(a)
+    lo, hi = 0, n-1
+    while lo <= hi:
+        p = partition(a, lo, hi)
+        if p == n-k:
+            return a[p]
+        elif p < n-k:
+            lo = p+1
+        else:
+            hi = p-1
+    raise RuntimeError
 
 
 if __name__ == '__main__':
