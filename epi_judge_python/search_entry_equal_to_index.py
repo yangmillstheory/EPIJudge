@@ -6,6 +6,8 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def search_entry_equal_to_its_index(a):
+    # T(n) = O(log n)
+    # S(n) = O(1)
     lo, hi = 0, len(a)-1
     while lo <= hi:
         mid = lo + (hi-lo)//2
