@@ -2,22 +2,33 @@ from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
 
+class QueueEmpty(RuntimeError):
+    pass
+
+
 class Queue:
     def __init__(self, capacity):
-        # TODO - you fill in here.
-        return
+        assert isinstance(capacity, int) and capacity > 0
+        self._head = 0
+        self._tail = 0
+        self._q = [None for _ in range(capacity)]
 
     def enqueue(self, x):
-        # TODO - you fill in here.
-        return
+        self._q[self._tail] = x
+        self._tail += 1
+        size = len(self._q)
+        if self._tail == size:
+            self._q += [None for _ in range(size)]
 
     def dequeue(self):
-        # TODO - you fill in here.
-        return 0
+        if not self.size():
+            raise QueueEmpty('Queue is empty!')
+        x = self._q[self._head]
+        self._head += 1
+        return x
 
     def size(self):
-        # TODO - you fill in here.
-        return 0
+        return self._tail-self._head
 
 
 def queue_tester(ops):
