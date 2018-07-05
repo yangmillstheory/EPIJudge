@@ -7,6 +7,8 @@ class QueueEmpty(RuntimeError):
 
 
 class Queue:
+    '''A dynamically resized Queue ADT.'''
+
     def __init__(self, capacity):
         assert isinstance(capacity, int) and capacity > 0
         self._head = 0
@@ -14,6 +16,7 @@ class Queue:
         self._q = [None for _ in range(capacity)]
 
     def enqueue(self, x):
+        '''Enqueue operation in amortized O(1) time.'''
         self._q[self._tail] = x
         self._tail += 1
         size = len(self._q)
@@ -21,6 +24,7 @@ class Queue:
             self._q += [None for _ in range(size)]
 
     def dequeue(self):
+        '''Dequeue an element in O(1) time. Raises exception if queue was empty.'''
         if not self.size():
             raise QueueEmpty('Queue is empty!')
         x = self._q[self._head]
@@ -28,6 +32,7 @@ class Queue:
         return x
 
     def size(self):
+        '''Returns the size of the queue.'''
         return self._tail-self._head
 
 
