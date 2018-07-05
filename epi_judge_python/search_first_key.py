@@ -17,6 +17,8 @@ def _search_recursive(cands, k, lo, hi):
 
 
 def _search_iterative(cands, k):
+    # T(n) = O(log n)
+    # S(n) = O(1)
     lo, hi = 0, len(cands)-1
     while lo <= hi:
         mid = lo + (hi-lo)//2
