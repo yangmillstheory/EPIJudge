@@ -16,8 +16,24 @@ def _search_recursive(cands, k, lo, hi):
         return _search_recursive(cands, k, lo, mid-1)
 
 
+def _search_iterative(cands, k):
+    lo, hi = 0, len(cands)-1
+    while lo <= hi:
+        mid = lo + (hi-lo)//2
+        if cands[mid] == k:
+            if mid == 0 or cands[mid-1] != k:
+                return mid
+            hi = mid-1
+        elif cands[mid] < k:
+            lo = mid+1
+        else:
+            hi = mid-1
+    return -1
+
+
 def search_first_of_k(cands, k):
-    return _search_recursive(cands, k, 0, len(cands)-1)
+    # return _search_recursive(cands, k, 0, len(cands)-1)
+    return _search_iterative(cands, k)
 
 
 if __name__ == '__main__':
