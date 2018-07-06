@@ -6,9 +6,23 @@ from test_framework.test_failure import PropertyName
 MinMax = collections.namedtuple('MinMax', ('smallest', 'largest'))
 
 
-def find_min_max(A):
-    # TODO - you fill in here.
-    return MinMax(0, 0)
+def min_max(x, y):
+    return MinMax(x, y) if x < y else MinMax(y, x)
+
+
+def find_min_max(a):
+    n = len(a)
+    if n == 1:
+        return a[0], a[0]
+    _min, _max = float('inf'), float('-inf')
+    for i in range(0, n-1, 2):
+        local_min_max = min_max(a[i], a[i+1])
+        _min = min(_min, local_min_max.smallest)
+        _max = max(_max, local_min_max.largest)
+    if n % 2:
+        _min = min(_min, a[-1])
+        _max = max(_max, a[-1])
+    return min_max(_min, _max)
 
 
 def res_printer(prop, value):
