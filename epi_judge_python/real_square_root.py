@@ -1,9 +1,16 @@
+import math
 from test_framework import generic_test
 
 
 def square_root(x):
-    # TODO - you fill in here.
-    return 0.0
+    lo, hi = float(0), max(x, 1)
+    while not math.isclose(lo, hi):
+        mid = lo + (hi-lo)/2
+        if mid*mid > x:
+            hi = mid
+        else:
+            lo = mid
+    return lo
 
 
 if __name__ == '__main__':
