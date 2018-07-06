@@ -11,6 +11,8 @@ def min_max(x, y):
 
 
 def find_min_max(a):
+    '''Finds the min. and max. elements in a single pass with
+    3n/2 comparisons and no extra space.'''
     n = len(a)
     if n == 1:
         return a[0], a[0]
