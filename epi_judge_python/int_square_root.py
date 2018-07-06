@@ -1,7 +1,7 @@
 from test_framework import generic_test
 
 
-def square_root(k):
+def _linear_time_sq_root(k):
     cand = 0
     for i in range(k+1):
         if pow(i, 2) <= k:
@@ -9,6 +9,10 @@ def square_root(k):
         else:
             break
     return cand
+
+
+def square_root(k):
+    return _linear_time_sq_root(k)
 
 
 if __name__ == '__main__':
