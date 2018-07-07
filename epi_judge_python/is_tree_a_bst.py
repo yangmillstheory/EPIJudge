@@ -1,3 +1,4 @@
+from collections import deque
 from test_framework import generic_test
 
 
@@ -26,8 +27,24 @@ def _inorder(tree):
     return True
 
 
+def _bfs(tree):
+    if not tree:
+        return True
+    q = deque([(tree, float('-inf'), float('inf'))])
+    while q:
+        tree, key_min, key_max = q.popleft()
+        l, r, data = tree.left, tree.right, tree.data
+        if data < key_min or data > key_max:
+            return False
+        if l:
+            q.append((l, key_min, min(key_max, data)))
+        if r:
+            q.append((r, max(key_min, data), key_max))
+    return True
+
+
 def is_binary_tree_bst(tree):
-    return _inorder(tree)
+    return _bfs(tree)
 
 
 if __name__ == '__main__':
