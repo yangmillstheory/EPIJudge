@@ -2,8 +2,17 @@ from test_framework import generic_test
 
 
 def find_first_greater_than_k(tree, k):
-    # TODO - you fill in here.
-    return None
+    '''Return a strict ceiling node for an integer k
+    in logarithmic time.
+    '''
+    cand = None
+    while tree:
+        if tree.data > k:
+            cand = tree
+            tree = tree.left
+        else:
+            tree = tree.right
+    return cand
 
 
 def find_first_greater_than_k_wrapper(tree, k):
