@@ -36,6 +36,7 @@ def successor(tree, node):
 
 
 def range_lookup_in_bst(tree, interval):
+    '''Find the range of keys in a BST within a closed interval in O(L*h) time.'''
     res = []
     if not tree:
         return res
