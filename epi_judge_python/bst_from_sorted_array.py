@@ -16,10 +16,32 @@ def _min_height_bst(a, lo, hi):
     return tree
 
 
-def build_min_height_bst_from_sorted_array(a):
+def _recursive(a):
     # T(n) = O(n)
     # S(n) = O(log n)
     return _min_height_bst(a, 0, len(a)-1)
+
+
+def _iterative(a):
+    root, stack = None, [(0, len(a)-1, None, None)]
+    while stack:
+        lo, hi, l_parent, r_parent = stack.pop()
+        if lo > hi:
+            continue
+        mid = lo + (hi-lo)//2
+        node = BstNode(a[mid])
+        root = root or node
+        if l_parent:
+            l_parent.right = node
+        if r_parent:
+            r_parent.left = node
+        stack.append((lo, mid-1, None, node))
+        stack.append((mid+1, hi, node, None))
+    return root
+
+
+def build_min_height_bst_from_sorted_array(a):
+    return _iterative(a)
 
 
 @enable_executor_hook
