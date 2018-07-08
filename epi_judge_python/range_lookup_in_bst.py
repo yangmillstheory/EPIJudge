@@ -69,6 +69,7 @@ def _range_lookup_recursive(tree, interval, res=None):
     return res
 
 
+# always do recursion first to get insight into the stack-based soluton!
 def _range_lookup_w_stack(tree, interval):
     a, b = interval
     res, stack = [], []
