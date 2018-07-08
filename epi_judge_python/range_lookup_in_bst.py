@@ -74,9 +74,13 @@ def _range_lookup_w_stack(tree, interval):
     res, stack = [], []
     while stack or tree:
         if tree:
-            if a <= tree.data:
+            if a <= tree.data <= b:
                 stack.append(tree)
                 tree = tree.left
+            elif a <= tree.data:
+                tree = tree.left
+            elif tree.data <= b:
+                tree = tree.right
             else:
                 tree = None
         else:
@@ -90,8 +94,8 @@ def _range_lookup_w_stack(tree, interval):
 
 
 def range_lookup_in_bst(tree, interval):
-    # return _range_lookup_w_stack(tree, interval)
-    return _range_lookup_recursive(tree, interval)
+    return _range_lookup_w_stack(tree, interval)
+    # return _range_lookup_recursive(tree, interval)
     # return _range_lookup_wo_stack(tree, interval)
 
 
