@@ -7,9 +7,15 @@ from test_framework.test_utils import enable_executor_hook
 
 
 # Input nodes are nonempty and the key at s is less than or equal to that at b.
-def find_LCA(tree, s, b):
-    # TODO - you fill in here.
-    return None
+def find_LCA(tree, x, y):
+    # T(n) = S(n) = O(h)
+    if not tree:
+        return
+    if max(x.data, y.data) < tree.data:
+        return find_LCA(tree.left, x, y)
+    if min(x.data, y.data) > tree.data:
+        return find_LCA(tree.right, x, y)
+    return tree
 
 
 @enable_executor_hook
