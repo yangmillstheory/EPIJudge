@@ -35,7 +35,7 @@ def successor(tree, node):
     return cand
 
 
-def range_lookup_in_bst(tree, interval):
+def _range_lookup_wo_stack(tree, interval):
     '''Find the range of keys in a BST within a closed interval in O(L*h) time.'''
     res = []
     if not tree:
@@ -50,6 +50,49 @@ def range_lookup_in_bst(tree, interval):
             break
         x = successor(tree, x)
     return res
+
+
+def _range_lookup_recursive(tree, interval, res=None):
+    if res is None:
+        res = []
+    if not tree:
+        return res
+    a, b = interval
+    if a <= tree.data <= b:
+        _range_lookup_recursive(tree.left, interval, res)
+        res.append(tree.data)
+        _range_lookup_recursive(tree.right, interval, res)
+    elif a <= tree.data:
+        _range_lookup_recursive(tree.left, interval, res)
+    elif tree.data <= b:
+        _range_lookup_recursive(tree.right, interval, res)
+    return res
+
+
+def _range_lookup_w_stack(tree, interval):
+    a, b = interval
+    res, stack = [], []
+    while stack or tree:
+        if tree:
+            if a <= tree.data:
+                stack.append(tree)
+                tree = tree.left
+            else:
+                tree = None
+        else:
+            tree = stack.pop()
+            if tree.data <= b:
+                res.append(tree.data)
+                tree = tree.right
+            else:
+                tree = None
+    return res
+
+
+def range_lookup_in_bst(tree, interval):
+    # return _range_lookup_w_stack(tree, interval)
+    return _range_lookup_recursive(tree, interval)
+    # return _range_lookup_wo_stack(tree, interval)
 
 
 def range_lookup_in_bst_wrapper(tree, i):
