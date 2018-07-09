@@ -17,9 +17,9 @@ def decoding(s):
 
 def encoding(s):
     # T(n) = S(n) = O(n)
-    n, buf, count = len(s), [], 0
-    for i in range(n+1):
-        if i == 0 or (i < n and s[i] == s[i-1]):
+    n, buf, count = len(s), [], 1
+    for i in range(1, n+1):
+        if i < n and s[i] == s[i-1]:
             count += 1
         else:
             buf.append(str(count))
