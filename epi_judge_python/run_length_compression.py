@@ -3,13 +3,29 @@ from test_framework.test_failure import TestFailure
 
 
 def decoding(s):
-    # TODO - you fill in here.
-    return ''
+    # T(n) = S(n) = O(n)
+    buf, buf_count = [], []
+    for ch in s:
+        if ch in '0123456789':
+            buf_count.append(ch)
+        else:
+            count = int(''.join(buf_count))
+            buf.extend([ch]*count)
+            buf_count = []
+    return ''.join(buf)
 
 
 def encoding(s):
-    # TODO - you fill in here.
-    return ''
+    # T(n) = S(n) = O(n)
+    buf, count, term = [], 0, '-'
+    for i, ch in enumerate(s + term):
+        if i == 0 or ch == s[i-1]:
+            count += 1
+        else:
+            buf.append(str(count))
+            buf.append(s[i-1])
+            count = 1
+    return ''.join(buf)
 
 
 def rle_tester(encoded, decoded):
