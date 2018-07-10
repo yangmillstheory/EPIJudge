@@ -3,7 +3,7 @@ from test_framework import generic_test
 
 
 def to_base_10(s, b):
-    '''Convert a string in base b <= 16 to a base 10 integer.'''
+    '''Convert a string representing a poz. integer in base b <= 16 to a base 10 integer.'''
     res = 0
     for i, c in enumerate(reversed(s)):
         res += pow(b, i)*(int(c) if c.isdigit() else ord(c)-ord('A')+10)
@@ -11,6 +11,7 @@ def to_base_10(s, b):
 
 
 def from_base_10(x, b):
+    '''Convert a poz. base 10 integer to a base b string.'''
     buf = deque()
     while x:
         x, rem = divmod(x, b)
