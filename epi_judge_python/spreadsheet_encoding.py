@@ -1,9 +1,15 @@
 from test_framework import generic_test
 
 
-def ss_decode_col_id(col):
-    # TODO - you fill in here.
-    return 0
+n_chars = ord('Z')-ord('A')+1
+
+
+def ss_decode_col_id(s):
+    col_id = 0
+    for i, ch in enumerate(reversed(s)):
+        c = ord(ch)-ord('A')+1
+        col_id += c*pow(n_chars, i)
+    return col_id
 
 
 if __name__ == '__main__':
