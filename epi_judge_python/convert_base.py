@@ -16,8 +16,6 @@ def from_base_10(x, b):
     while x:
         x, rem = divmod(x, b)
         buf.appendleft(str(rem) if rem < 10 else chr(ord('A')+rem-10))
-        if x == -1:
-            break
     return ''.join(buf)
 
 
