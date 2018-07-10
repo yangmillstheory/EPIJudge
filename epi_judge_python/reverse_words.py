@@ -7,6 +7,7 @@ DELIMITER = ' '
 
 
 def reverse(seq, lo, hi):
+    '''Reverse a sequence in O(hi-lo) time.'''
     while lo <= hi:
         seq[lo], seq[hi] = seq[hi], seq[lo]
         lo += 1
@@ -14,6 +15,7 @@ def reverse(seq, lo, hi):
 
 
 def reverse_words(b_array):
+    '''Reverse words of a bytearray in O(W*w) time.'''
     n = len(b_array)
     reverse(b_array, 0, n-1)
     i = 0
