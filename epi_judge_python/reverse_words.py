@@ -1,13 +1,26 @@
 import functools
-
 from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 
 
-# Assume s is a string encoded as bytearray.
-def reverse_words(s):
-    # TODO - you fill in here.
-    return
+DELIMITER = ' '
+
+
+def reverse(seq, lo, hi):
+    while lo <= hi:
+        seq[lo], seq[hi] = seq[hi], seq[lo]
+        lo += 1
+        hi -= 1
+
+
+def reverse_words(b_array):
+    n = len(b_array)
+    reverse(b_array, 0, n-1)
+    i = 0
+    for j in range(n+1):
+        if j == n or chr(b_array[j]) == DELIMITER:
+            reverse(b_array, i, j-1)
+            i = j+1
 
 
 @enable_executor_hook
