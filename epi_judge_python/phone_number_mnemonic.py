@@ -16,7 +16,7 @@ keypad = {
 
 
 def phone_mnemonic(s, i=0, cand=None, res=None):
-    # T(n) = O(4^n)
+    # T(n) = O(n*4^n)
     # S(n) = O(n)
     if res is None:
         res = []
