@@ -15,10 +15,10 @@ def replace_and_remove(size, a):
             continue
         a[w_start] = a[i]
         w_start += 1
-    # white out any entries after the last write
+    # white out any stale (now moved to front) entries
     for i in range(w_start, size):
         a[i] = ''
-    w_end = w_start + a.count('a') - 1
+    w_end = n = w_start + a.count('a') - 1
     # replace 'a' by moving everything to the back
     for j in range(w_start-1, -1, -1):
         if a[j] == 'a':
@@ -27,8 +27,7 @@ def replace_and_remove(size, a):
         else:
             a[w_end] = a[j]
             w_end -= 1
-    while a and a[-1] == '':
-        a.pop()
+    return n+1
 
 
 @enable_executor_hook
