@@ -1,3 +1,4 @@
+from collections import deque
 from test_framework import generic_test, test_utils
 
 
@@ -29,6 +30,24 @@ def _recursive(s, i, cand, res):
             cand.append(ch)
             phone_mnemonic(s, i+1, cand, res)
             cand.pop()
+    return res
+
+
+def compute(s):
+    def from_base_10(x, b):
+        '''Convert a poz. base 10 integer to a base b string.'''
+        buf = deque()
+        while x:
+            x, rem = divmod(x, b)
+            buf.appendleft(str(rem))
+        return ''.join(buf)
+
+    # note that this requires the keypad values to be constrained to 3 possible values
+    base, res, n = 3, [], len(s)
+    for i in range(pow(base, n)):
+        x = from_base_10(i, base)
+        x = x.zfill(n)
+        res.append(''.join([keypad[s[i]][int(d)] for i, d in enumerate(x)]))
     return res
 
 
