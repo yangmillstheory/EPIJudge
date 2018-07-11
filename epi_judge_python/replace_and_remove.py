@@ -4,9 +4,31 @@ from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 
 
-def replace_and_remove(size, s):
-    # TODO - you fill in here.
-    return 0
+def replace_and_remove(size, a):
+    '''Replace all "a" with two "d"'s and remove all "b"'s.
+
+    Algorithm runs in O(n) time and O(1) space.'''
+    # delete 'b' by moving everything to the front
+    w_start = 0
+    for i in range(size):
+        if a[i] == 'b':
+            continue
+        a[w_start] = a[i]
+        w_start += 1
+    # white out any entries after the last write
+    for i in range(w_start, size):
+        a[i] = ''
+    w_end = w_start + a.count('a') - 1
+    # replace 'a' by moving everything to the back
+    for j in range(w_start-1, -1, -1):
+        if a[j] == 'a':
+            a[w_end] = a[w_end-1] = 'd'
+            w_end -= 2
+        else:
+            a[w_end] = a[j]
+            w_end -= 1
+    while a and a[-1] == '':
+        a.pop()
 
 
 @enable_executor_hook
