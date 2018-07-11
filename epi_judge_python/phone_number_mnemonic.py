@@ -44,8 +44,8 @@ def compute(s):
 
     # note that this requires the keypad values to be constrained to 3 possible values
     base, res, n = 3, [], len(s)
-    for i in range(pow(base, n)):
-        x = from_base_10(i, base)
+    for y in range(pow(base, n)):
+        x = from_base_10(y, base)
         x = x.zfill(n)
         res.append(''.join([keypad[s[i]][int(d)] for i, d in enumerate(x)]))
     return res
