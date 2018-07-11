@@ -15,8 +15,6 @@ def get_valid_ip_address(s):
             return False
         if len(t) > 1 and t[0] == '0':
             return False
-        if t == '00' or t == '000':
-            return False
         return 0 <= int(t) <= 255
 
     res, cand = [], []
