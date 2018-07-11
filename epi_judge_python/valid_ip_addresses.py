@@ -31,6 +31,12 @@ def get_valid_ip_address(s):
                                 if is_octet(sub1) and is_octet(sub2):
                                     with candidate(cand, sub1), candidate(cand, sub2):
                                         res.append('.'.join(cand))
+                                else:
+                                    break
+                    else:
+                        break
+        else:
+            break
     return res
 
 
