@@ -15,7 +15,7 @@ keypad = {
 }
 
 
-def phone_mnemonic(s, i=0, cand=None, res=None):
+def _recursive(s, i, cand, res):
     # T(n) = O(n*4^n)
     # S(n) = O(n)
     if res is None:
@@ -30,6 +30,10 @@ def phone_mnemonic(s, i=0, cand=None, res=None):
             phone_mnemonic(s, i+1, cand, res)
             cand.pop()
     return res
+
+
+def phone_mnemonic(s):
+    return _recursive(s, 0)
 
 
 if __name__ == '__main__':

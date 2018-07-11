@@ -1,9 +1,39 @@
+from contextlib import contextmanager
 from test_framework import generic_test
 
 
+@contextmanager
+def candidate(cand, sub):
+    cand.append(sub)
+    yield
+    cand.pop()
+
+
 def get_valid_ip_address(s):
-    # TODO - you fill in here.
-    return []
+    def is_octet(t):
+        if not t:
+            return False
+        if len(t) > 1 and t[0] == '0':
+            return False
+        if t == '00' or t == '000':
+            return False
+        return 0 <= int(t) <= 255
+
+    res, cand = [], []
+    for i in range(1, 4):
+        sub = s[:i]
+        if is_octet(sub):
+            with candidate(cand, sub):
+                for j in range(i+1, i+4):
+                    sub = s[i:j]
+                    if is_octet(sub):
+                        with candidate(cand, sub):
+                            for k in range(j+1, len(s)):
+                                sub1, sub2 = s[j:k], s[k:]
+                                if is_octet(sub1) and is_octet(sub2):
+                                    with candidate(cand, sub1), candidate(cand, sub2):
+                                        res.append('.'.join(cand))
+    return res
 
 
 def comp(a, b):
