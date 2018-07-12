@@ -1,6 +1,6 @@
 from test_framework import generic_test
 
-units = {
+to_decimal = {
     'I': 1,
     'V': 5,
     'X': 10,
@@ -17,9 +17,9 @@ def roman_to_integer(s):
     res, i, n = 0, 0, len(s)
     while i < n:
         x = s[i]
-        p = units[x]
+        p = to_decimal[x]
         if i+1 < n:
-            y, q = s[i+1], units[s[i+1]]
+            y, q = s[i+1], to_decimal[s[i+1]]
         else:
             y, q = '-', 0
         if (x == 'I' and y in {'V', 'X'}) or \
