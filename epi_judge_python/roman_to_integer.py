@@ -1,9 +1,37 @@
 from test_framework import generic_test
 
+units = {
+    'I': 1,
+    'V': 5,
+    'X': 10,
+    'L': 50,
+    'C': 100,
+    'D': 500,
+    'M': 1000,
+}
+
 
 def roman_to_integer(s):
-    # TODO - you fill in here.
-    return 0
+    # T(n) = O(n)
+    # S(n) = O(1)
+    res, i, n = 0, 0, len(s)
+    while i < n:
+        x = s[i]
+        p = units[x]
+        if i+1 < n:
+            y, q = s[i+1], units[s[i+1]]
+        else:
+            y, q = '-', 0
+        if (x == 'I' and y in {'V', 'X'}) or \
+           (x == 'X' and y in {'L', 'C'}) or \
+           (x == 'C' and y in {'D', 'M'}):
+            res += q-p
+            next_i = i+2
+        else:
+            res += p
+            next_i = i+1
+        i = next_i
+    return res
 
 
 if __name__ == '__main__':
