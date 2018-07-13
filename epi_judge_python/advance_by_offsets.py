@@ -5,6 +5,7 @@ def can_reach_end(a):
     n = len(a)
     dp = [True] + [False]*(n-1)
     for j in range(1, n):
+        # it's best to iterate from the right to the left to allow for early termination
         dp[j] = any(dp[i] and i+a[i] >= j for i in range(j-1, -1, -1))
         if not dp[j]:
             return False
