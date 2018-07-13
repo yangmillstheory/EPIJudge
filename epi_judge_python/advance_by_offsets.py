@@ -1,8 +1,13 @@
 from test_framework import generic_test
 
 
-def can_reach_end(A):
-    # TODO - you fill in here.
+def can_reach_end(a):
+    n = len(a)
+    dp = [True] + [False]*(n-1)
+    for j in range(1, n):
+        dp[j] = any(dp[i] and i+a[i] >= j for i in range(j-1, -1, -1))
+        if not dp[j]:
+            return False
     return True
 
 
