@@ -16,12 +16,12 @@ def dp_1(a):
 def can_reach_end(a):
     best = float('-inf')
     for i, jump in enumerate(a):
-        if i > best:
+        if best != float('-inf') and i > best:
             return False
         if i+jump >= len(a)-1:
             return True
         best = max(best, i+jump)
-    return best >= len(a)-1
+    raise ValueError(a)
 
 
 if __name__ == '__main__':
