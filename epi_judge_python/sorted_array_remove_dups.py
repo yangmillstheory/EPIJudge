@@ -5,9 +5,19 @@ from test_framework.test_utils import enable_executor_hook
 
 
 # Returns the number of valid entries after deletion.
-def delete_duplicates(A):
-    # TODO - you fill in here.
-    return 0
+def delete_duplicates(a):
+    '''Remove duplicates from a sorted array in place in O(n) time.'''
+    i = w = 0
+    n = len(a)
+    while i < n:
+        while i and i < n and a[i] == a[i-1]:
+            i += 1
+        if i == n:
+            break
+        a[w] = a[i]
+        i += 1
+        w += 1
+    return w
 
 
 @enable_executor_hook
