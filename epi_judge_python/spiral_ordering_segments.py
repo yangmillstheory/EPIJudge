@@ -2,22 +2,22 @@ import itertools
 from test_framework import generic_test
 
 
-def top(g, depth, n):
+def T(g, depth, n):
     for j in range(depth, n-depth-1):
         yield g[depth][j]
 
 
-def right(g, depth, n):
+def R(g, depth, n):
     for i in range(depth, n-depth-1):
         yield g[i][-depth-1]
 
 
-def bottom(g, depth, n):
+def B(g, depth, n):
     for j in reversed(range(depth+1, n-depth)):
         yield g[-depth-1][j]
 
 
-def left(g, depth, n):
+def L(g, depth, n):
     for i in reversed(range(depth+1, n-depth)):
         yield g[i][depth]
 
@@ -28,7 +28,7 @@ def matrix_in_spiral_order(g):
     n = len(g)
     m = n//2
     it = itertools.chain.from_iterable(
-        itertools.chain(top(g, depth, n), right(g, depth, n), bottom(g, depth, n), left(g, depth, n))
+        itertools.chain(T(g, depth, n), R(g, depth, n), B(g, depth, n), L(g, depth, n))
         for depth in range(m)
     )
     if n % 2:
