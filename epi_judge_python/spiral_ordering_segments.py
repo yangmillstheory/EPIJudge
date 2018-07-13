@@ -26,8 +26,7 @@ def matrix_in_spiral_order(g):
     if not g or not g[0]:
         return []
     n = len(g)
-    if n == 1:
-        return [g[0][0]]
+    m = n//2
     it = itertools.chain.from_iterable([
         list(top(g, depth, n)) +
         list(right(g, depth, n)) +
@@ -37,7 +36,7 @@ def matrix_in_spiral_order(g):
     ])
     res = list(it)
     if n % 2:
-        res.append(g[n//2][n//2])
+        res.append(g[m][m])
     return res
 
 
