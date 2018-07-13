@@ -27,7 +27,7 @@ def matrix_in_spiral_order(g):
         return []
     n = len(g)
     m = n//2
-    it = itertools.chain(
+    it = itertools.chain.from_iterable(
         itertools.chain(top(g, depth, n), right(g, depth, n), bottom(g, depth, n), left(g, depth, n))
         for depth in range(m)
     )
