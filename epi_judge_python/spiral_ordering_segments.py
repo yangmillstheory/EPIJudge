@@ -27,18 +27,15 @@ def matrix_in_spiral_order(g):
         return []
     n = len(g)
     m = n//2
-    it = itertools.chain.from_iterable([
-        list(top(g, depth, n)) +
-        list(right(g, depth, n)) +
-        list(bottom(g, depth, n)) +
-        list(left(g, depth, n))
-        for depth in range(n//2)
-    ])
-    res = list(it)
+    res = []
+    for depth in range(m):
+        res.extend(top(g, depth, n))
+        res.extend(right(g, depth, n))
+        res.extend(bottom(g, depth, n))
+        res.extend(left(g, depth, n))
     if n % 2:
         res.append(g[m][m])
     return res
-
 
 
 if __name__ == '__main__':
