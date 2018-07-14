@@ -6,9 +6,8 @@ def apply_permutation(p, a):
         j, prev = i, a[i]
         while p[j] is not None:
             a[p[j]], prev = prev, a[p[j]]
-            # temp = p[j]
-            j, p[j] = p[j], None
-            # j = temp
+            temp, p[j] = p[j], None
+            j = temp
 
 
 def apply_permutation_wrapper(perm, A):
