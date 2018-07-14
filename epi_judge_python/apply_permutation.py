@@ -1,9 +1,16 @@
 from test_framework import generic_test
 
 
-def apply_permutation(perm, A):
-    # TODO - you fill in here.
-    return
+def apply_permutation(p, a):
+    for i in range(len(p)):
+        j, prev = i, a[i]
+        while p[j] is not None:
+            temp = a[p[j]]
+            a[p[j]] = prev
+            prev = temp
+            temp = p[j]
+            p[j] = None
+            j = temp
 
 
 def apply_permutation_wrapper(perm, A):
