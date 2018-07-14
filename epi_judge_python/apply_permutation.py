@@ -5,9 +5,7 @@ def apply_permutation(p, a):
     for i in range(len(p)):
         j, prev = i, a[i]
         while p[j] is not None:
-            temp = a[p[j]]
-            a[p[j]] = prev
-            prev = temp
+            a[p[j]], prev = prev, a[p[j]]
             temp = p[j]
             p[j] = None
             j = temp
