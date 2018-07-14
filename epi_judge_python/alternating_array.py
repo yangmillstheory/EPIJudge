@@ -1,3 +1,4 @@
+import operator
 import functools
 
 from test_framework import generic_test
@@ -5,9 +6,12 @@ from test_framework.test_failure import PropertyName, TestFailure
 from test_framework.test_utils import enable_executor_hook
 
 
-def rearrange(A):
-    # TODO - you fill in here.
-    return
+def rearrange(a):
+    for i in range(1, len(a)):
+        if i % 2 == 0 and a[i] >= a[i-1]:
+            a[i], a[i-1] = a[i-1], a[i]
+        elif i % 2 != 0 and a[i] <= a[i-1]:
+            a[i], a[i-1] = a[i-1], a[i]
 
 
 @enable_executor_hook
