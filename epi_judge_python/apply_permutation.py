@@ -2,6 +2,7 @@ from test_framework import generic_test
 
 
 def apply_permutation(p, a):
+    '''Apply a permutation in in-place in O(n) time.'''
     for i in range(len(p)):
         j, prev = i, a[i]
         while p[j] is not None:
