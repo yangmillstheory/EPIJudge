@@ -9,14 +9,13 @@ def reverse(a, lo, hi):
 
 
 def next_permutation(a):
-    n, k = len(a), None
+    n = len(a)
     for j in range(n-1, 0, -1):
         if a[j] > a[j-1]:
             k = j
             break
     else:
         return []
-    i = None
     for j in range(n-1, k-1, -1):
         if a[j] > a[k-1]:
             i = j
