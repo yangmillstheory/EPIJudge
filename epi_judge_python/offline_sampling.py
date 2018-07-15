@@ -11,12 +11,9 @@ def random_sampling(k, a):
     '''Return a random subset of a of size k in O(k) time and O(1) space.
 
     Algorithm is similar to the Fisher-Yates shuffle.'''
-    n = len(a)
-    j = 0
-    for _ in range(k):
-        i = random.randint(j, n-1)
+    for j in range(k):
+        i = random.randint(j, len(a)-1)
         a[i], a[j] = a[j], a[i]
-        j += 1
 
 
 @enable_executor_hook
