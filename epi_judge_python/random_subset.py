@@ -15,9 +15,9 @@ def random_subset(n, k):
         j = randint(i, n-1)
         if i == j:
             continue
-        temp = swaps.get(i, i)
+        i_mapped = swaps.get(i, i)
         swaps[i] = swaps.get(j, j)
-        swaps[j] = temp
+        swaps[j] = i_mapped
     return [swaps.get(i, i) for i in range(k)]
 
 
