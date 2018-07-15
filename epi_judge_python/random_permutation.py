@@ -9,6 +9,7 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def compute_random_permutation(n):
+    '''Return a random permutation of 0, ..., n-1 in O(n) time.'''
     a = list(range(n))
     for i in range(n):
         j = randint(i, n-1)
