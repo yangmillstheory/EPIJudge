@@ -1,6 +1,5 @@
 import functools
 from random import randint
-from itertools import islice
 from test_framework import generic_test
 from test_framework.random_sequence_checker import (
     binomial_coefficient, check_sequence_is_uniformly_random,

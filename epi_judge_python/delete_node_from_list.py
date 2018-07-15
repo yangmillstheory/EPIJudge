@@ -4,10 +4,9 @@ from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 
 
-# Assumes node_to_delete is not tail.
-def deletion_from_list(node_to_delete):
-    # TODO - you fill in here.
-    return
+def deletion_from_list(node):
+    node.data = node.next.data
+    node.next = node.next.next
 
 
 @enable_executor_hook
