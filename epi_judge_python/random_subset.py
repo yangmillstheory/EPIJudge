@@ -1,5 +1,6 @@
 import functools
-
+from random import randint
+from itertools import islice
 from test_framework import generic_test
 from test_framework.random_sequence_checker import (
     binomial_coefficient, check_sequence_is_uniformly_random,
@@ -8,8 +9,16 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def random_subset(n, k):
-    # TODO - you fill in here.
-    return []
+    '''Random subset from 0, ..., n-1 in O(k) time and space.'''
+    swaps = {}
+    for i in range(k):
+        j = randint(i, n-1)
+        if i == j:
+            continue
+        temp = swaps.get(i, i)
+        swaps[i] = swaps.get(j, j)
+        swaps[j] = temp
+    return [swaps.get(i, i) for i in range(k)]
 
 
 @enable_executor_hook
