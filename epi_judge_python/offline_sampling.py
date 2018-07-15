@@ -8,9 +8,6 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def random_sampling(k, a):
-    '''Return a random subset of a of size k in O(k) time and O(1) space.
-
-    Algorithm is similar to the Fisher-Yates shuffle.'''
     for j in range(k):
         i = random.randint(j, len(a)-1)
         a[i], a[j] = a[j], a[i]
