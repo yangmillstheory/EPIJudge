@@ -10,7 +10,7 @@ from test_framework.test_utils import enable_executor_hook
 
 # Assumption: there are at least k elements in the stream.
 def online_random_sample(it, k):
-    res = [x for x in itertools.islice(it, k)]
+    res = list(itertools.islice(it, k))
     for j, x in enumerate(it, k):
         i = randint(0, j)
         if i < k:
