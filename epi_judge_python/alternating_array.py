@@ -1,4 +1,3 @@
-import operator
 import functools
 
 from test_framework import generic_test
