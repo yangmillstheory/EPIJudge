@@ -1,5 +1,5 @@
+import random
 import functools
-
 from test_framework import generic_test
 from test_framework.random_sequence_checker import (
     binomial_coefficient, check_sequence_is_uniformly_random,
@@ -7,9 +7,13 @@ from test_framework.random_sequence_checker import (
 from test_framework.test_utils import enable_executor_hook
 
 
-def random_sampling(k, A):
-    # TODO - you fill in here.
-    return
+def random_sampling(k, a):
+    n = len(a)
+    j = 0
+    for _ in range(k):
+        i = random.randint(j, n-1)
+        a[i], a[j] = a[j], a[i]
+        j += 1
 
 
 @enable_executor_hook
