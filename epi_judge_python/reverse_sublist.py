@@ -11,7 +11,7 @@ def get_kth(head, k):
 
 def reverse_sublist(head, s, f):
     '''Reverse a sublist of a singly-linked list in O(f) time.'''
-    dummy = prev_s = ListNode(0, head)
+    dummy = ListNode(0, head)
     prev_s = get_kth(dummy, s)
     s_node = prev_s.next
     f_node = get_kth(s_node, f-s+1)
