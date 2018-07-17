@@ -13,8 +13,7 @@ def remove_kth_last(head, k):
     fast = walk(dummy, k+1)
     while fast:
         slow, fast = slow.next, fast.next
-    if slow.next:
-        slow.next = slow.next.next
+    slow.next = slow.next.next
     return dummy.next
 
 
