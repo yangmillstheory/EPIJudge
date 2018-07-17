@@ -21,13 +21,11 @@ def is_linked_list_a_palindrome(head):
     n = get_length(head)
     if n <= 1:
         return True
-    s = n//2 + 1
+    s, n_steps = n//2 + 1, n//2
     if n % 2 != 0:
         s += 1
-    reverse_sublist(head, s, n)
-    n_steps = n//2
-    if n % 2 != 0:
         n_steps += 1
+    reverse_sublist(head, s, n)
     tail = walk(head, n_steps)
     is_pali = True
     node = head
