@@ -3,6 +3,7 @@ from test_framework import generic_test
 
 
 def remove_duplicates(head):
+    # T(n) = O(n)
     dummy = ListNode(0, head)
     p, q = dummy, dummy.next
     while p and q:
