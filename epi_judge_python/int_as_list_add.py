@@ -15,8 +15,8 @@ def add_two_numbers(x, y):
         else:
             carry = 0
         node.next = ListNode(s)
-        x = x or x.next
-        y = y or y.next
+        x = x and x.next
+        y = y and y.next
         node = node.next
     return dummy.next
 
