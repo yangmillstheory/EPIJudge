@@ -20,7 +20,7 @@ def cyclically_right_shift_list(head, k):
     # T(n) = O(n)
     # S(n) = O(1)
     n = length(head)
-    if not n or not k:
+    if not n:
         return head
     k = k % n
     if not k:
