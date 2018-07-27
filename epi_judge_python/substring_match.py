@@ -12,12 +12,12 @@ def rabin_karp(t, s):
     t_hash = reduce(lambda h, ch: base*h + ord(ch), t[:n], 0)
     s_hash = reduce(lambda h, ch: base*h + ord(ch), s, 0)
     for i in range(m-n):
-        if t_hash == s_hash and t[i:i+n] == s:
+        if t_hash == s_hash:
             return i
         t_hash -= pow(base, n-1)*ord(t[i])
         t_hash *= base
         t_hash += ord(t[i+n])
-    if t_hash == s_hash and t[m-n:] == s:
+    if t_hash == s_hash:
         return m-n
     return -1
 
