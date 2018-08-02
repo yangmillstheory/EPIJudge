@@ -10,7 +10,7 @@ class QueueWithMax(deque):
 
     def enqueue(self, x):
         self.append(x)
-        while self._next_maxes and self._next_maxes[-1] < x:
+        while self._next_maxes and self._next_maxes[-1] <= x:
             self._next_maxes.pop()
         self._next_maxes.append(x)
 
