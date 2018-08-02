@@ -7,26 +7,26 @@ class QueueWithMax(deque):
     '''Queue with max API. Takes up O(n) extra space.'''
 
     def __init__(self):
-        self._cands = deque()
+        self._next_maxes = deque()
 
     def enqueue(self, x):
         # T(n) = O(1) amortized?
         self.append(x)
-        while self._cands and self._cands[-1] < x:
+        while self._next_maxes and self._next_maxes[-1] < x:
             # all previous and lesser candidates can never be the max.
-            self._cands.pop()
-        self._cands.append(x)
+            self._next_maxes.pop()
+        self._next_maxes.append(x)
 
     def dequeue(self):
         # T(n) = O(1)
         x = self.popleft()
-        if x == self._cands[0]:
-            self._cands.popleft()
+        if x == self.max():
+            self._next_maxes.popleft()
         return x
 
     def max(self):
         # T(n) = O(1)
-        return self._cands[0] if self._cands else None
+        return self._next_maxes[0] if self._next_maxes else None
 
 
 def queue_tester(ops):
