@@ -24,17 +24,17 @@ def longest_matching_parentheses(s):
     :param s: a string consisting of '(' and ')'
     :returns: non-negative int
     '''
-    best, end = 0, -1
+    best, left = 0, -1
     o = []
     for j, ch in enumerate(s):
         if ch == '(':
             o.append(j)
         elif o:
             o.pop()
-            start = o[-1] if o else end
-            best = max(best, j-start)
+            i = o[-1] if o else left
+            best = max(best, j-i)
         else:
-            end = j
+            left = j
     return best
 
 
