@@ -17,14 +17,25 @@ def shitty_quad_time_algo(s):
     return best
 
 
-def longest_substring_with_matching_parentheses(s):
+def longest_matching_parentheses(s):
     '''Returns the length of the longest substring with matched
     parentheses in O(n) time and O(n) space.
 
     :param s: a string consisting of '(' and ')'
     :returns: non-negative int
     '''
-    pass
+    best, end = 0, -1
+    stack = []
+    for j, ch in enumerate(s):
+        if ch == '(':
+            stack.append(j)
+        elif stack:
+            stack.pop()
+            start = stack[-1] if stack else end
+            best = max(best, j-start)
+        else:
+            end = j
+    return best
 
 
 if __name__ == '__main__':
