@@ -25,13 +25,13 @@ def longest_matching_parentheses(s):
     :returns: non-negative int
     '''
     best, end = 0, -1
-    stack = []
+    o = []
     for j, ch in enumerate(s):
         if ch == '(':
-            stack.append(j)
-        elif stack:
-            stack.pop()
-            start = stack[-1] if stack else end
+            o.append(j)
+        elif o:
+            o.pop()
+            start = o[-1] if o else end
             best = max(best, j-start)
         else:
             end = j
