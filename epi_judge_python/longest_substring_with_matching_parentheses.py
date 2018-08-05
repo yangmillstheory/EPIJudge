@@ -1,9 +1,30 @@
 from test_framework import generic_test
 
 
-def longest_matching_parentheses(s):
-    # TODO - you fill in here.
-    return 0
+def shitty_quad_time_algo(s):
+    n, best = len(s), 0
+    for i in range(n):
+        n_open = 0
+        for j in range(i, n):
+            if s[j] == '(':
+                n_open += 1
+            elif n_open:
+                n_open -= 1
+            else:
+                break
+            if n_open == 0:
+                best = max(best, j-i+1)
+    return best
+
+
+def longest_substring_with_matching_parentheses(s):
+    '''Returns the length of the longest substring with matched
+    parentheses in O(n) time and O(n) space.
+
+    :param s: a string consisting of '(' and ')'
+    :returns: non-negative int
+    '''
+    pass
 
 
 if __name__ == '__main__':
