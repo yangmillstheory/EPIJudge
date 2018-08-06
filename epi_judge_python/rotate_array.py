@@ -5,6 +5,7 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def rotate_array(k, a):
+    '''Rotate an array in O(n) time and O(1) space.'''
     n = len(a)
     k %= n
     i = t = 0
