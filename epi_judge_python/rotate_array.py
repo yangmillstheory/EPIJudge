@@ -4,9 +4,23 @@ from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 
 
-def rotate_array(rotate_amount, A):
-    # TODO - you fill in here.
-    return
+def rotate_array(k, a):
+    n = len(a)
+    k %= n
+    i = t = 0
+    while i < k and t < n:
+        prev = a[i]
+        j = (i+k) % n
+        while t < n:
+            temp = a[j]
+            a[j], prev = prev, temp
+            t += 1
+            if j == i:
+                # need this here instead of the loop
+                # condition since we want to swap into i
+                break
+            j = (j+k) % n
+        i += 1
 
 
 @enable_executor_hook
