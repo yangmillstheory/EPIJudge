@@ -22,9 +22,6 @@ def justify_text(words, max_len):
 
 
 if __name__ == '__main__':
-    # res = justify_text(['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dogs.'], 11)
-    # for w in res:
-    #     print(w, len(w))
     exit(
         generic_test.generic_test_main("left_right_justify_text.py",
                                        'left_right_justify_text.tsv',
