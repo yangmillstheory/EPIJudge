@@ -6,6 +6,8 @@ Subarray = collections.namedtuple('Subarray', ('start', 'end'))
 
 
 def find_longest_increasing_subarray(a):
+    # T(n) = O(n)
+    # S(n) = O(1)
     s = Subarray(0, 0)
     i, n = 0, len(a)
     while i < n:
