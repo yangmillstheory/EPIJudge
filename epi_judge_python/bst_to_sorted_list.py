@@ -10,7 +10,7 @@ class Dummy:
         self.right = None
 
 
-def bst_to_doubly_linked_list(root):
+def bst_to_doubly_linked_list_extra_memory(root):
     '''Convert a BST to a sorted doubly-linked list in O(n) time and space.'''
     prev = dummy = Dummy()
     stack = []
@@ -26,6 +26,19 @@ def bst_to_doubly_linked_list(root):
     if root:
         root.left = None
     return root
+
+
+def bst_to_doubly_linked_list(root):
+    def _build_list(node):
+        if node is None:
+            return None, None
+        prev_node, next_node = _build_list(node.left), _build_list(node.right)
+        if prev_node[1]:
+            prev_node[1].right, node.left = node, prev_node[1]
+        if next_node[0]:
+            next_node[0].left, node.right = node, next_node[0]
+        return prev_node[0] or node, next_node[1] or node
+    return _build_list(root)[0]
 
 
 @enable_executor_hook
