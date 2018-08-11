@@ -1,9 +1,17 @@
 from test_framework import generic_test
 
 
-def max_subarray_sum_in_circular(A):
-    # TODO - you fill in here.
-    return 0
+def find_optimal_sub(a, comparator):
+    prev, max_seen = 0, 0
+    for x in a:
+        prev = comparator(prev+x, x)
+        max_seen = comparator(prev, max_seen)
+    return comparator(max_seen, 0)
+
+
+def max_subarray_sum_in_circular(a):
+    s = sum(a)
+    return max(find_optimal_sub(a, max), s -find_optimal_sub(a, min))
 
 
 if __name__ == '__main__':
