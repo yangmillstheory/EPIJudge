@@ -5,9 +5,27 @@ from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
 
-def bst_to_doubly_linked_list(tree):
-    # TODO - you fill in here.
-    return None
+class Dummy:
+    def __init__(self):
+        self.right = None
+
+
+def bst_to_doubly_linked_list(root):
+    '''Convert a BST to a sorted doubly-linked list in O(n) time and space.'''
+    prev = dummy = Dummy()
+    stack = []
+    while stack or root:
+        if root:
+            stack.append(root)
+            root = root.left
+        else:
+            node = stack.pop()
+            prev.right, node.left = node, prev
+            prev, root = node, node.right
+    root = dummy.right
+    if root:
+        root.left = None
+    return root
 
 
 @enable_executor_hook
