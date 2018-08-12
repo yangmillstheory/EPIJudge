@@ -15,14 +15,14 @@ def compute_skyline(a):
     for l, r, _h in a:
         for i in range(l, r+1):
             h[i-min_l] = max(h[i-min_l], _h)
-    sl = []
+    res = []
     left = 0
     for i, _h in enumerate(h):
         if i and _h != h[i-1]:
-            sl.append(Rectangle(min_l+left, min_l+i-1, h[i-1]))
+            res.append(Rectangle(min_l+left, min_l+i-1, h[i-1]))
             left = i
-    sl.append(Rectangle(min_l+left, max_r, h[-1]))
-    return sl
+    res.append(Rectangle(min_l+left, max_r, h[-1]))
+    return res
 
 
 @enable_executor_hook
