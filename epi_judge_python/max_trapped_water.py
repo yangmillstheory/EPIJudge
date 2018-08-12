@@ -3,6 +3,7 @@ from test_framework import generic_test
 
 def get_max_trapped_water(hs):
     # T(n) = O(n)
+    # S(n) = O(1)
     lo, hi = 0, len(hs)-1
     _max_area = 0
     while lo <= hi:
