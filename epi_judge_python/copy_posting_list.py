@@ -39,9 +39,28 @@ def _jump_first_order_iterative(node):
     return clones[node]
 
 
-def copy_postings_list(L):
-    # return _jump_first_order_recursive(L, {None: None})
-    return _jump_first_order_iterative(L)
+def copy_postings_list(node):
+    it = node
+    while it:
+        copy = PostingListNode(it.order, it.next, None)
+        it.next = copy
+        it = copy.next
+    it = node
+    while it:
+        if it.jump:
+            it.next.jump = it.jump.next
+        it = it.next.next
+    it = node
+    if not it:
+        return
+    head = it.next
+    while it:
+        orig_next = it.next.next
+        if orig_next:
+            it.next.next = orig_next.next
+        it.next = orig_next
+        it = it.next
+    return head
 
 
 def assert_lists_equal(orig, copy):
